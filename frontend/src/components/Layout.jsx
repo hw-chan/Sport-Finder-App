@@ -10,6 +10,7 @@ function Layout() {
   const [openModal, setOpenModal] = useState(false);
   const [modalMode, setModalMode] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
+  const [error, setError] = useState(false)
   const [authToken, setAuthToken] = useLocalStorage("authToken", "");
 
   const location = useLocation();
@@ -21,6 +22,7 @@ function Layout() {
 
   const closeModal = () => {
     setOpenModal(false);
+    setError(false)
   };
 
   const handleAuthToken = (token) => {
@@ -30,6 +32,8 @@ function Layout() {
   const handleMenu = () => {
     setOpenMenu(!openMenu);
   };
+
+  const handleError = (status) => setError(status)
 
   const handleLogout = () => setAuthToken("");
 
@@ -102,6 +106,8 @@ function Layout() {
         closeModal={closeModal}
         authToken={authToken}
         handleAuthToken={handleAuthToken}
+        handleError={handleError}
+        error={error}
       />
       <Menu
         openMenu={openMenu}

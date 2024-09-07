@@ -16,10 +16,11 @@ function AccountModal({
   closeModal,
   authToken,
   handleAuthToken,
+  handleError,
+  error
 }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false)
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -61,10 +62,10 @@ function AccountModal({
       });
       if (result.data && result.data.auth === true && result.data.token) {
         handleAuthToken(result.data.token);
-        setError(false)
+        handleError(false)
       }
     } catch (error) {
-      setError(true)
+      handleError(true)
       console.error(error);
     }
   };
@@ -116,16 +117,16 @@ function AccountModal({
                   />
                 </label>
                 <br />
-                  <p className="mt-8 text-red-500">{error ? "Invalid username or password" : ""}</p>
+                  <p className="mt-2 h-4 text-red-500">{error ? "Invalid username or password" : ""}</p>
                 <button
                   type="submit"
-                  className="mt-2 w-full rounded border bg-[#2B293D] py-2 text-center text-white"
+                  className="mt-8 w-full rounded border bg-[#2B293D] py-2 text-center text-white"
                 >
                   {modalMode === "register" ? "Sign Up" : "Log in"}
                 </button>
               </form>
               {modalMode == "register" && (
-                <p className="mt-2 text-xs text-gray-400">
+                <p className={`text-xs text-gray-400 mt-2`}>
                   Already have an account?
                   <span
                     className="cursor-pointer text-black hover:text-gray-400"
