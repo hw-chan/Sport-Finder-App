@@ -46,7 +46,7 @@ export default function DisplayedMap({ location }) {
   }, [coordinates]);
 
   return (
-    <div className= "relative h-72 w-full border border-black desktop:w-[40%] tablet:w-[50%]">
+    <div className= "relative h-72 w-full border border-black">
       <div ref={mapContainer} className="absolute h-full w-full z-0" />
     </div>
   );

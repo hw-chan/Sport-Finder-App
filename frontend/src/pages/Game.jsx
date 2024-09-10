@@ -73,13 +73,13 @@ function Game() {
   };
 
   return (
-    <div className="mb-16 desktop:mx-36 mt-4 tablet:mx-12">
+    <div className="mb-16 desktop:mx-36 mt-4 tablet:mx-24">
       {isGameHost && (
         <p className="ml-8 mt-6 flex h-7 w-12 items-center justify-center rounded-full border-2 border-red-500 bg-orange-100 text-xs text-red-500 desktop:w-24">
           Host
         </p>
       )}
-      <div className="mx-8 mt-1 flex flex-col gap-2">
+      <div className="mx-8 mt-1 flex flex-col gap-2 desktop:w-[600px] tablet:w-[400px]">
         <p className="text-2xl font-bold desktop:text-3xl">{game.title}</p>
         <div className="flex items-center">
           {game.sport === "football" ? (
@@ -95,11 +95,11 @@ function Game() {
           )}{" "}
           <p className="ml-1">{game.sport}</p>
         </div>
-        <div className="flex items-center mt-4">
+        <div className="flex items-center ">
           <IoCalendarNumberOutline className="mr-1" />{" "}
           {formatDate(game?.start_time)}
         </div>
-        <div className="flex items-center mb-4">
+        <div className="flex items-center ">
           <IoTimeOutline className="mr-1" />
           {formatStartTime(game?.start_time)} - {formatEndTime(game?.end_time)}
         </div>
@@ -118,7 +118,7 @@ function Game() {
           <p>
             Going {game.participants.length}/{game.number_of_players}
           </p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {Array.from({ length: game.number_of_players }).map((_, index) =>
               index < game.participants.length ? (
                 <img
@@ -137,7 +137,7 @@ function Game() {
         </div>
         <div>
           <button
-            className={`mt-6 h-7 w-full rounded-md border ${isGameHost ? `bg-red-700` : `bg-green-500`} text-white tablet:w-[40%] desktop:w-[20%]`}
+            className={`mt-6 h-7 w-full rounded-md border ${isGameHost ? `bg-red-700` : `bg-green-500`} text-white`}
             onClick={() => {
               handleButton(game.participants.includes(userId));
               game.host !== userId && notify(game.participants.includes(userId));

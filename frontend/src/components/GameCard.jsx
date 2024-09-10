@@ -22,10 +22,8 @@ import {
   formatStartTime,
   formatEndTime,
 } from "../utils/formatDateAndTime";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-function GameCard({ game, loading }) {
+function GameCard({ game, loading, notify }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const ref = useRef();
@@ -38,14 +36,6 @@ function GameCard({ game, loading }) {
   if (loading) {
     return;
   }
-
-  const notify = (status, userId, host) => {
-    !status
-      ? toast("You have joined a game.")
-      : userId === host
-        ? toast("Host is not allowed to leave game.")
-        : toast("You have left a game.");
-  };
 
   const token = localStorage.getItem("authToken").replace(/"/g, "");
   const userId = getUserId(token);
@@ -142,13 +132,6 @@ function GameCard({ game, loading }) {
           {game.participants.includes(userId) ? "Joined" : "Join"}
         </button>
       </div>
-      <ToastContainer
-        position="top-center"
-        theme="dark"
-        autoClose="3000"
-        progressClassName="black"
-        toastStyle={{ border: "3px solid yellow" }}
-      />
     </div>
   );
 }

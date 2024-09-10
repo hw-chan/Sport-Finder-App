@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserGames } from "../features/game/gameSlice";
 import GameCard from "../components/GameCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function UserGame() {
   const userGames = useSelector((state) => state.game.userGames);
@@ -11,6 +13,14 @@ function UserGame() {
   useEffect(() => {
     dispatch(fetchUserGames());
   }, [dispatch]);
+
+  const notify = (status, userId, host) => {
+    !status
+      ? toast("You have joined a game.")
+      : userId === host
+        ? toast("Host is not allowed to leave game.")
+        : toast("You have left a game.");
+  };
 
   return (
     <div className="mx-8 mt-2 desktop:mt-6 desktop:mx-24">
@@ -24,9 +34,16 @@ function UserGame() {
             return dateTimeA - dateTimeB;
           })
           .map((game) => (
-            <GameCard key={game.id} game={game} loading={loading} />
+            <GameCard key={game.id} game={game} loading={loading} notify={notify}/>
           ))}
       </div>}
+      <ToastContainer
+        position="top-center"
+        theme="dark"
+        autoClose="3000"
+        progressClassName="black"
+        toastStyle={{ border: "3px solid yellow" }}
+      />
     </div>
   );
 }

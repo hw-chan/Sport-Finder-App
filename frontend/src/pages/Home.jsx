@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchAllGames, fetchUserGames } from "../features/game/gameSlice";
 import GameCard from "../components/GameCard";
 import Filter from "../components/Filter";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function calculateTimeDifference(startTime) {
@@ -84,7 +85,7 @@ function Home() {
           stateOfCountry,
         });
   };
-  
+
   const handleReset = () =>
     setFilter({
       sport: "Default",
@@ -93,6 +94,14 @@ function Home() {
     });
 
   const handleView = (gameId) => navigate(`/game/${gameId}`);
+
+  const notify = (status, userId, host) => {
+    !status
+      ? toast("You have joined a game.")
+      : userId === host
+        ? toast("Host is not allowed to leave game.")
+        : toast("You have left a game.");
+  };
 
   return (
     <div className="mx-8 mb-12 mt-2 desktop:mx-24 desktop:mt-6">
@@ -148,9 +157,16 @@ function Home() {
             return isActive && matchSport && matchCountry && matchState;
           })
           .map((game) => (
-            <GameCard key={game.id} game={game} loading={loading} />
+            <GameCard key={game.id} game={game} loading={loading} notify={notify}/>
           ))}
       </section>
+      <ToastContainer
+        position="top-center"
+        theme="dark"
+        autoClose="3000"
+        progressClassName="black"
+        toastStyle={{ border: "3px solid yellow" }}
+      />
     </div>
   );
 }
