@@ -41,7 +41,7 @@ function Layout() {
 
   return (
     <div
-      className={`z-1 h-screen w-screen ${index ? "overflow-hidden" : "no-scrollbar overflow-auto"}`}
+      className={`z-1 h-screen w-screen ${index ? "overflow-hidden" : "no-scrollbar overflow-auto "} fixed tablet:relative`}
     >
       <div className="flex h-20 items-center justify-between bg-black px-6 tablet:px-8 desktop:px-10">
         <p className="cursor-pointer font-lalezar text-3xl text-[#FFE047] tablet:text-4xl">
