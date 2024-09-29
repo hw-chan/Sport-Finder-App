@@ -14,7 +14,6 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route>
             <Route path="/" element={<Layout />}>
               <Route index element={<AuthPage />} />
               <Route path="/home" element={<Home />} />
@@ -23,7 +22,6 @@ function App() {
               <Route path="/game/:id" element={<Game />} />
               <Route path="/game/user" element={<UserGame />} />
             </Route>
-          </Route>
         </Routes>
       </BrowserRouter>
     </Provider>

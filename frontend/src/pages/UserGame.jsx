@@ -32,6 +32,14 @@ function UserGame() {
             const dateTimeA = new Date(a.start_time);
             const dateTimeB = new Date(b.start_time);
             return dateTimeA - dateTimeB;
+          }).filter((game) => {
+            const gameTime = new Date(game.end_time);
+            const currentTime = new Date();
+
+            const isActive =
+              currentTime < gameTime 
+
+            return isActive 
           })
           .map((game) => (
             <GameCard key={game.id} game={game} loading={loading} notify={notify}/>
