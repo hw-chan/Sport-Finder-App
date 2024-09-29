@@ -2,7 +2,7 @@ export function formatStartTime(startTime) {
 
   const startTimeObj = new Date(startTime);
   const options = {
-    timeZone: "Asia/Kuala_Lumpur",
+    timeZone: "UTC",
     hour: "numeric",
     minute: "numeric",
   };
@@ -16,7 +16,7 @@ export function formatStartTime(startTime) {
 export function formatEndTime(endTime) {
   const endTimeObj = new Date(endTime);
   const options = {
-    timeZone: "Asia/Kuala_Lumpur",
+    timeZone: "UTC",
     hour: "numeric",
     minute: "numeric",
   };
@@ -30,7 +30,7 @@ export function formatEndTime(endTime) {
 export function formatDate(startTime) {
   const date = new Date(startTime);
   const day = date.getDate();
-  const month = date.toLocaleString("en-GB", { month: "long", timeZone: "Asia/Kuala_Lumpur" });
+  const month = date.toLocaleString("en-GB", { month: "long", timeZone: "UTC" });
 
   return `${day} ${month}`;
 }
